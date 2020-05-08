@@ -1,0 +1,82 @@
+
+
+{
+    "vim.easymotion": true,
+    "vim.sneak": true,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.insertModeKeyBindings": [
+      {
+        "before": ["j", "j"],
+        "after": ["<Esc>"]
+      }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+      {
+        "before": ["<leader>", "w"],
+        "after": [":w"]
+      },
+      {
+        "before": ["<leader>","w"],
+        "commands": [":w"]
+      },
+      {
+        "before": ["<leader>","q"],
+        "commands": [":q"]
+      },
+      {
+        "before": ["<leader>","u"],
+        "commands": [":sp"]
+      },
+      {
+        "before": ["<leader>","r"],
+        "commands": [":vsp"]
+      },
+      {
+        "before": ["<leader>","p"],
+        "commands": [":tabp"]
+      },
+      {
+        "before": ["<leader>","n"],
+        "commands": [":tabn"]
+      },
+      {
+        "before": ["<leader>","o"],
+        "commands": [":tabo"]
+      },
+      {
+        "before": ["<leader>","s"],
+        "commands": [":tabs"]
+      },
+      {
+        "before": ["<leader>","c"],
+        "commands": [":tabc"]
+      },
+      {
+        "before": ["<leader>","e","w"],
+        "commands": [":tabnew"]
+      },
+      {
+        "before": ["<leader>","l"],
+        "commands": ["<C-w>"]
+      },
+      {
+        "before": ["<leader>","j"],
+        "commands": [":! "]
+      }
+    ],
+    "vim.leader": " ",
+    "vim.handleKeys": {
+      
+    },
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "window.zoomLevel": 4,
+    "workbench.statusBar.visible": false,
+    "workbench.activityBar.visible": false,
+    "workbench.colorTheme": "Abyss"
+  
+  }
+  
