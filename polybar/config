@@ -30,10 +30,10 @@ alert = #bd2c40
 [bar/example]
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
-height = 20
+height = 27
 ;offset-x = 1%
 ;offset-y = 1%
-radius = 6.0
+radius = 8.0
 fixed-center = false
 
 background = ${colors.background}
@@ -45,10 +45,10 @@ line-color = #f00
 border-size = 4
 border-color = #00000000
 
-padding-left = 0
+padding-left = 2
 padding-right = 2
 
-module-margin-left = 1
+module-margin-left = 3
 module-margin-right = 2
 
 font-0 = fixed:pixelsize=10;1
@@ -57,7 +57,7 @@ font-2 = siji:pixelsize=10;1
 
 modules-left = bspwm i3
 modules-center = mpd
-modules-right = filesystem xbacklight alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-right = filesystem xbacklight pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -103,7 +103,7 @@ interval = 25
 
 mount-0 = /
 
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-mounted = disk %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
@@ -184,7 +184,7 @@ label-song-ellipsis = true
 type = internal/xbacklight
 
 format = <label> <bar>
-label = BL
+label = BL%percentage%%
 
 bar-width = 10
 bar-indicator = |
@@ -208,7 +208,7 @@ interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #f90000
-label = %percentage:2%%
+label = cpu|%percentage:2%%
 
 [module/memory]
 type = internal/memory
@@ -216,16 +216,16 @@ interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #4bffdc
-label = %percentage_used%%
+label = memory|%percentage_used%%
 
 [module/wlan]
 type = internal/network
-interface = net1
+interface = wlp2s0 
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
 format-connected-underline = #9f78e1
-label-connected = %essid%
+label-connected = %essid%> %downspeed:9%
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
@@ -342,6 +342,9 @@ format-discharging-underline = ${self.format-charging-underline}
 format-full-prefix = " "
 format-full-prefix-foreground = ${colors.foreground-alt}
 format-full-underline = ${self.format-charging-underline}
+
+label-charging = Charging %percentage%%
+label-discharging = Discharging %percentage%%
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
