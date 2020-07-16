@@ -1,4 +1,49 @@
-call plug#begin('~/.vim/plugged')
+
+inoremap jj <esc>
+set nu
+set sm
+set ai
+set hlsearch
+syntax on
+set ic
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set autoindent
+set incsearch
+set wildmenu
+set norelativenumber
+set cursorline
+set wrap
+"高亮显示当前列
+set cursorcolumn
+"显示光标当前位置
+set ruler
+
+"html代码补全
+
+
+"""""""""""""" 将空格键当作快捷键 """"""""""""""""""
+let mapleader=" "
+map <leader>wq :wq<CR>
+map <leader>q :q!<CR>
+map <leader>w :w<CR>
+map <leader>u :sp<CR>
+map <leader>r :vsp<CR>
+map <leader>p :tabp<CR>
+map <leader>n :tabn<CR>
+map <leader>s :tabs<CR>
+map <leader>o :tabo<CR>
+map <leader>c :tabc<CR>
+map <leader>ew :tabnew
+map <leader>a <C-w>
+map <leader>j :! 
+map <leader>gr :GoRun<CR>
+
+imap ii <C-x><C-o>
+
+
+call plug#begin('~/.vim/plugs')
 
 """"""目录树
 Plug 'preservim/nerdtree'
@@ -18,46 +63,17 @@ Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' 
 """""markdowm"""""
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-
-Plug 'Valloric/YouCompleteMe'
+"""""缩进线"""""
+Plug 'Yggdroot/indentLine'
+"""""代码补全"""""
+Plug 'ycm-core/YouCompleteMe'
+"""""悬浮终端"""""
+Plug 'voldikss/vim-floaterm'
+"""""tagbar"""""
+Plug 'majutsushi/tagbar'
 
 call plug#end()
 
-
-
-inoremap jj <esc>
-set nu
-set sm
-set ai
-set hlsearch
-syntax on
-set ic
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-set autoindent
-
-"html代码补全
-
-
-"""""""""""""" 将空格键当作快捷键 """"""""""""""""""
-let mapleader=" "
-map <leader>wq :wq<CR>
-map <leader>q :q<CR>
-map <leader>w :w<CR>
-map <leader>u :sp<CR>
-map <leader>r :vsp<CR>
-map <leader>p :tabp<CR>
-map <leader>n :tabn<CR>
-map <leader>s :tabs<CR>
-map <leader>o :tabo<CR>
-map <leader>c :tabc<CR>
-map <leader>ew :tabnew
-map <leader>a <C-w>
-map <leader>j :! 
-map <leader>gr :GoRun<CR>
-
-imap ii <C-x><C-o>
 
 """"""""""""""""""""""目录树""""""""""""""""""""
 let g:NERDTreeDirArrowExpandable = '▸'
@@ -105,42 +121,65 @@ map <leader>9 :b 9<CR>
 let g:solarized_termtrans  = 1        " 使用 termnal 背
 let g:solarized_visibility = "high"   " 使用 :set list 显示特殊字符时的高亮级别
 
+""""""缩进线""""""
+let g:indentLine_color_term = 239
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 
+"""""python补全"""""
+" cd ~/.vim/plugs
+" git clone https://github.com/rkulla/pydiction.git
 
+let g:pydiction_location = '~/.vim/plugs/pydiction/complete-dict'
+let g:pydiction_menu_height = 3
 
+""""悬浮窗口""""
+map <leader>o :FloatermNew<CR>
 
-"""""""""""YouCompleteMe"""""""""""
-" 自动补全配置
-set completeopt=longest,menu "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>" "回车即选中当前项
-"上下左右键的行为 会显示其他信息
-inoremap <expr> <Down> pumvisible() ? "\<C-n>" : "\<Down>"
-inoremap <expr> <Up> pumvisible() ? "\<C-p>" : "\<Up>"
-inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
-inoremap <expr> <PageUp> pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+""""vim-go""""
+let g:go_fmt_command = "goimports" " 格式化将默认的 gofmt 替换
+let g:go_autodetect_gopath = 1
+let g:go_list_type = "quickfix"
+let g:go_version_warning = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_generate_tags = 1
+let g:godef_split=2
+map <leader>g GoRun<CR>
 
-"youcompleteme 默认tab s-tab 和自动补全冲突
-"let g:ycm_key_list_select_completion=['<c-n>']
-let g:ycm_key_list_select_completion = ['<Down>']
-"let g:ycm_key_list_previous_completion=['<c-p>']
-let g:ycm_key_list_previous_completion = ['<Up>']
-let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
-
-let g:ycm_collect_identifiers_from_tags_files=1 " 开启 YCM 基于标签引擎
-let g:ycm_min_num_of_chars_for_completion=2 " 从第2个键入字符就开始罗列匹配项
-let g:ycm_cache_omnifunc=0 " 禁止缓存匹配项,每次都重新生成匹配项
-let g:ycm_seed_identifiers_with_syntax=1 " 语法关键字补全
-nnoremap <F5> :YcmForceCompileAndDiagnostics<CR> "force recomile with syntastic
-"nnoremap <leader>lo :lopen<CR> "open locationlist
-"nnoremap <leader>lc :lclose<CR> "close locationlist
-inoremap <leader><leader> <C-x><C-o>
-"在注释输入中也能补全
-let g:ycm_complete_in_comments = 1
-"在字符串输入中也能补全
-let g:ycm_complete_in_strings = 1
-"注释和字符串中的文字也会被收入补全
-let g:ycm_collect_identifiers_from_comments_and_strings = 0
-
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> " 跳转到定义处
+""""tagbar""""
+nmap <F1> :TagbarToggle<CR>
+let g:tagbar_width=25
+let g:tagbar_ctags_bin="~/go/bin"
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
